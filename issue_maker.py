@@ -148,10 +148,18 @@ def add_song():
     lyrics = Lyrics(song=song, artist=artist, stripper=stripper)
     db.session.add(lyrics)
     db.session.commit()
+    with open('unsupported.txt', 'r') as f:
+        lines = f.readlines()
+        f.close()
+    with open('unsupported.txt', 'w') as f:
+        for line in lines:
+            if line != "{song} by {artist}\n".format(song=song, artist=artist):
+                f.write(line) 
+        f.close()                
     return "Added"
 
 @app.route("/master_unsupported", methods=["GET", "POST"])
 def master_unsupported():
     with open('unsupported.txt', 'r') as f:
         data = f.read()
-        return data
+    return data
