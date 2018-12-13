@@ -8,7 +8,6 @@ from unidecode import unidecode
 
 app = Flask(__name__)
 username = os.environ['USERNAME']
-print(username)
 gh_token = 'GH_TOKEN'
 token = ''
 t_expiry = 0
@@ -45,7 +44,8 @@ def stripper(song, artist):
 def create_issue(song, artist, stripper='not supported yet'):
     json = {
         "title": "{song} by {artist} unsupported.".format(song=song, artist=artist),
-        "body": "Check if issue with swaglyrics or whether song lyrics unavailable on Genius. \n<hr>\n <tt><b>stripper -> {stripper}</b></tt>".format(
+        "body": "Check if issue with swaglyrics or whether song lyrics "
+                "unavailable on Genius. \n<hr>\n <tt><b>stripper -> {stripper}</b></tt>".format(
             stripper=stripper),
         "labels": ["unsupported song"]
     }
