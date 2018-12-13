@@ -149,3 +149,9 @@ def add_song():
     db.session.add(lyrics)
     db.session.commit()
     return "Added"
+
+@app.route("/master_unsupported", methods=["GET", "POST"])
+def master_unsupported():
+    with open('unsupported.txt', 'r') as f:
+        data = f.read()
+        return data
