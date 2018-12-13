@@ -132,14 +132,13 @@ def update():
     
 @app.route("/stripper", methods=["GET", "POST"])
 def stripper():
-    if request.method == 'POST':
-        song = request.form['song']
-        artist = request.form['artist']
-        lyrics = Lyrics.query.filter(Lyrics.song==song).filter(Lyrics.artist==artist).first()
-        if lyrics:
-            return lyrics.stripper
-        else:
-            return "No Stripper Found"
+    song = request.form['song']
+    artist = request.form['artist']
+    lyrics = Lyrics.query.filter(Lyrics.song==song).filter(Lyrics.artist==artist).first()
+    if lyrics:
+        return lyrics.stripper
+    else:
+        return "No Stripper Found"
 
 @app.route("/add_song", methods=["GET", "POST"])
 def add_song():
