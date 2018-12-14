@@ -138,7 +138,7 @@ def stripper():
     if lyrics:
         return lyrics.stripper
     else:
-        return "No Stripper Found"
+        return "Stripper Not Found"
 
 @app.route("/add_song", methods=["GET", "POST"])
 def add_song():
@@ -150,12 +150,10 @@ def add_song():
     db.session.commit()
     with open('unsupported.txt', 'r') as f:
         lines = f.readlines()
-        f.close()
     with open('unsupported.txt', 'w') as f:
         for line in lines:
             if line != "{song} by {artist}\n".format(song=song, artist=artist):
-                f.write(line) 
-        f.close()                
+                f.write(line)           
     return "Added"
 
 @app.route("/master_unsupported", methods=["GET", "POST"])
