@@ -19,12 +19,12 @@ SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://{username}:{password}@{usernam
     databasename="DB_NAME",
 )
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-app.config["SQLALCHEMY_POOL_RECYCLE"] = 299
+app.config["SQLALCHEMY_POOL_RECYCLE"] = 280
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 class Lyrics(db.Model):
-    __tablename__ = "strip"
+    __tablename__ = "stripper"
 
     id = db.Column(db.Integer, primary_key=True)
     song = db.Column(db.String(4096))
@@ -131,7 +131,7 @@ def update():
                "ticket at https://github.com/aadibajpai/SwagLyrics-For-Spotify/issues"
     
 @app.route("/stripper", methods=["GET", "POST"])
-def stripper():
+def add_stripper():
     song = request.form['song']
     artist = request.form['artist']
     lyrics = Lyrics.query.filter(Lyrics.song==song).filter(Lyrics.artist==artist).first()
@@ -154,7 +154,7 @@ def add_song():
         for line in lines:
             if line != "{song} by {artist}\n".format(song=song, artist=artist):
                 f.write(line)           
-    return "Added"
+    return "Added stripper for {song} by {artist} to database".format(song=song, artist=artist)
 
 @app.route("/master_unsupported", methods=["GET", "POST"])
 def master_unsupported():
