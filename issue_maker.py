@@ -131,7 +131,7 @@ def update():
                "ticket at https://github.com/aadibajpai/SwagLyrics-For-Spotify/issues"
     
 @app.route("/stripper", methods=["GET", "POST"])
-def add_stripper():
+def get_stripper():
     song = request.form['song']
     artist = request.form['artist']
     lyrics = Lyrics.query.filter(Lyrics.song==song).filter(Lyrics.artist==artist).first()
@@ -140,8 +140,8 @@ def add_stripper():
     else:
         return "Stripper Not Found"
 
-@app.route("/add_song", methods=["GET", "POST"])
-def add_song():
+@app.route("/add_stripper", methods=["GET", "POST"])
+def add_stripper():
     song = request.form['song']
     artist = request.form['artist']
     stripper = request.form['stripper']
